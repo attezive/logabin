@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExampleViewPagerAdapter extends FragmentStatePagerAdapter {
+public class ExampleViewPagerAdapter extends FragmentPagerAdapter {
     private final List<Fragment> fragmentList = new ArrayList<>();
 
     public ExampleViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {
