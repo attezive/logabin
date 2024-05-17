@@ -37,14 +37,12 @@ public class HomeFragment extends Fragment {
         Button btn_education = root.findViewById(R.id.education);
 
         ViewPager vp = getActivity().findViewById(R.id.viewpager);
-        TabLayout tl = getActivity().findViewById(R.id.navigation);
 
 
         btn_settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 vp.setCurrentItem(3);
-                tl.selectTab(null);
             }
         });
 
@@ -52,7 +50,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 vp.setCurrentItem(4);
-                tl.selectTab(null);
             }
         });
 
@@ -60,7 +57,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 vp.setCurrentItem(5);
-                tl.selectTab(null);
             }
         });
 
