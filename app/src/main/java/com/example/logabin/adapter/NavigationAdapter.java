@@ -4,15 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExampleViewPagerAdapter extends FragmentPagerAdapter {
+public class NavigationAdapter extends FragmentPagerAdapter {
     private final List<Fragment> fragmentList = new ArrayList<>();
 
-    public ExampleViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {
+    public NavigationAdapter(@NonNull FragmentManager fm, int behavior) {
         super(fm, behavior);
     }
 
@@ -30,6 +29,5 @@ public class ExampleViewPagerAdapter extends FragmentPagerAdapter {
     public void addFragment(Fragment fragment) {
         fragmentList.add(fragment);
     }
-
 
 }
