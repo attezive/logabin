@@ -14,6 +14,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.logabin.R;
@@ -25,10 +27,19 @@ import com.example.logabin.model.MapElementItem;
 
 public class EditorFragment extends Fragment {
     private TextView infoMenu;
-    private int currentElementId = -1;
+    private LinearLayout actionMenu;
+    private MapElementItem currentItem;
+    private int xSize;
+    private int ySize;
+    private int currentResize;
+    private ImageView btnPositive;
+    private ImageView btnNegative;
 
     public EditorFragment() {
-        // Required empty public constructor
+        xSize = 3;
+        ySize = 2;
+        currentResize = 0;
+        currentItem = null;
     }
 
     @Override
@@ -40,31 +51,105 @@ public class EditorFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_editor, container, false);
+
         infoMenu = root.findViewById(R.id.info_menu);
+        actionMenu = root.findViewById(R.id.action_menu);
+
+        btnPositive = root.findViewById(R.id.btn_positive);
+        btnNegative = root.findViewById(R.id.btn_negative);
+        ImageView btnStart = root.findViewById(R.id.btn_start);
+        ImageView btnSave = root.findViewById(R.id.btn_save);
+        ImageView btnResize = root.findViewById(R.id.btn_resize);
 
         RecyclerView editMapRV = root.findViewById(R.id.edit_map);
 
-        editMapRV.setLayoutManager(new GridLayoutManager(getContext(), 10,
+
+        editMapRV.setLayoutManager(new GridLayoutManager(getContext(), ySize,
                 GridLayoutManager.HORIZONTAL, false));
 
-        EditMapAdapter editMapAdapter = new EditMapAdapter(this);
-        for (int i = 0; i < 200; i++)
+        EditMapAdapter editMapAdapter = new EditMapAdapter(this, xSize, ySize);
+        for (int i = 0; i < xSize*ySize; i++)
             editMapAdapter.Add(new MapElementItem(i));
 
         editMapRV.setAdapter(editMapAdapter);
+
+        btnStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        btnResize.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentResize = (currentResize + 1) % 3;
+                updateButtons();
+            }
+        });
+
+        btnPositive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (currentResize == 0){
+                    editMapAdapter.addNewYLine(1);
+                    GridLayoutManager gridLayoutManager = (GridLayoutManager) editMapRV.getLayoutManager();
+                    gridLayoutManager.setSpanCount(editMapAdapter.getYSize());
+                } else if (currentResize == 1) {
+                    editMapAdapter.addNewXLine(1);
+                } else {
+                }
+            }
+        });
+
+        btnNegative.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (currentResize == 0){
+                    editMapAdapter.addNewYLine(-1);
+                    GridLayoutManager gridLayoutManager = (GridLayoutManager) editMapRV.getLayoutManager();
+                    gridLayoutManager.setSpanCount(editMapAdapter.getYSize());
+                } else if (currentResize == 1) {
+                    editMapAdapter.addNewXLine(-1);
+                } else {
+                }
+            }
+        });
 
         return root;
     }
 
     public void updateElement(MapElementItem item){
-        if (currentElementId!=item.getId()){
+        if (currentItem == null || !currentItem.equals(item)){
             infoMenu.setText(item.toString());
+            actionMenu.setVisibility(View.GONE);
             infoMenu.setVisibility(View.VISIBLE);
 
-            currentElementId = item.getId();
+            currentItem = item;
         } else {
             infoMenu.setVisibility(View.GONE);
-            currentElementId = -1;
+            actionMenu.setVisibility(View.VISIBLE);
+            currentItem = null;
+        }
+    }
+
+    private void updateButtons(){
+        if (currentResize == 0){
+            btnPositive.setImageResource(R.drawable.bottom);
+            btnNegative.setImageResource(R.drawable.top);
+        } else if (currentResize == 1) {
+            btnPositive.setImageResource(R.drawable.left);
+            btnNegative.setImageResource(R.drawable.right);
+        } else {
+            btnPositive.setImageResource(R.drawable.plus);
+            btnNegative.setImageResource(R.drawable.minus);
         }
     }
 }

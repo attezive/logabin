@@ -20,11 +20,15 @@ import java.util.List;
 
 public class EditMapAdapter extends RecyclerView.Adapter<EditMapAdapter.EditMapViewHolder> {
     private List<MapElementItem> list = new ArrayList<>();
-    EditorFragment editorFragment = null;
+    private int xSize;
+    private int ySize;
+    private EditorFragment editorFragment;
 
-    public EditMapAdapter(EditorFragment fragment){
+    public EditMapAdapter(EditorFragment fragment, int xSize, int ySize){
         super();
         editorFragment = fragment;
+        this.xSize = xSize;
+        this.ySize = ySize;
     }
 
     @NonNull
@@ -65,5 +69,52 @@ public class EditMapAdapter extends RecyclerView.Adapter<EditMapAdapter.EditMapV
     public void Add(MapElementItem mapElementItem){
         list.add(mapElementItem);
         notifyDataSetChanged();
+    }
+
+    public void Add(MapElementItem mapElementItem, int position){
+        list.add(position, mapElementItem);
+        notifyDataSetChanged();
+    }
+
+    public void addNewXLine(int direction){
+        if (direction == 1){
+            for (int i = 0; i < ySize; i++){
+                Add(new MapElementItem(ySize-i-1), 0);
+            }
+        } else {
+            for (int i = 0; i < ySize; i++){
+                Add(new MapElementItem(xSize*ySize+i));
+            }
+        }
+        xSize++;
+        updateIds();
+    }
+
+    public void addNewYLine(int direction){
+        if (direction == 1){
+            for (int i = 0; i < xSize; i++){
+                Add(new MapElementItem(0), (i+1)*ySize);
+            }
+        } else {
+            for (int i = 0; i < xSize; i++){
+                Add(new MapElementItem(0), i*(ySize+1));
+            }
+        }
+        ySize++;
+        updateIds();
+    }
+
+    public int getXSize() {
+        return xSize;
+    }
+
+    public int getYSize() {
+        return ySize;
+    }
+
+    public void updateIds(){
+        for (int i = 0; i < list.size(); i++){
+            list.get(i).setId(i);
+        }
     }
 }
