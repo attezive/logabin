@@ -1,18 +1,18 @@
 package com.example.logabin.adapter;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.logabin.R;
-import com.example.logabin.databinding.FolderItemBinding;
 import com.example.logabin.databinding.MapElementItemBinding;
 import com.example.logabin.fragment.EditorFragment;
-import com.example.logabin.model.FolderItem;
 import com.example.logabin.model.MapElementItem;
 
 import java.util.ArrayList;
@@ -21,6 +21,7 @@ import java.util.List;
 
 public class EditMapAdapter extends RecyclerView.Adapter<EditMapAdapter.EditMapViewHolder> {
     private List<MapElementItem> list = new ArrayList<>();
+    private List<LinearLayout> map = new ArrayList<>();
     private int xSize;
     private int ySize;
     private EditorFragment editorFragment;
@@ -40,6 +41,10 @@ public class EditMapAdapter extends RecyclerView.Adapter<EditMapAdapter.EditMapV
         return new EditMapViewHolder(newView);
     }
 
+    public List<LinearLayout> getMap() {
+        return map;
+    }
+
     @Override
     public int getItemCount() {
         return list.size();
@@ -47,7 +52,7 @@ public class EditMapAdapter extends RecyclerView.Adapter<EditMapAdapter.EditMapV
 
     @Override
     public void onBindViewHolder(@NonNull EditMapViewHolder holder, int position) {
-        holder.bind(list.get(position));
+        holder.bind(list.get(position), position);
 
     }
 
@@ -58,13 +63,14 @@ public class EditMapAdapter extends RecyclerView.Adapter<EditMapAdapter.EditMapV
             mapElementItemBinding = MapElementItemBinding.bind(itemView);
         }
 
-        public void bind(MapElementItem mapElementItem){
+        public void bind(MapElementItem mapElementItem, int position){
             mapElementItemBinding.mapElement.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     editorFragment.updateElement(mapElementItem);
                 }
             });
+            map.add(position, mapElementItemBinding.mapElement);
         }
     }
 

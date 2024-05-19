@@ -1,5 +1,7 @@
 package com.example.logabin.fragment;
 
+import android.graphics.Color;
+import android.graphics.ColorFilter;
 import android.opengl.Visibility;
 import android.os.Bundle;
 
@@ -26,6 +28,8 @@ import com.example.logabin.adapter.NavigationAdapter;
 import com.example.logabin.model.FolderItem;
 import com.example.logabin.model.MapElementItem;
 
+import java.util.List;
+
 public class EditorFragment extends Fragment {
     private TextView infoMenu;
     private LinearLayout actionMenu;
@@ -38,8 +42,8 @@ public class EditorFragment extends Fragment {
     RecyclerView editMapRV;
 
     public EditorFragment() {
-        xSize = 3;
-        ySize = 2;
+        xSize = 5;
+        ySize = 4;
         currentResize = 0;
         currentItem = null;
     }
@@ -75,10 +79,31 @@ public class EditorFragment extends Fragment {
 
         editMapRV.setAdapter(editMapAdapter);
 
+
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                List<LinearLayout> map = editMapAdapter.getMap();
+                ImageView view = map.get(1).findViewById(R.id.element_img);
+                view.setImageResource(R.drawable.input);
+                view = map.get(5).findViewById(R.id.element_img);
+                view.setImageResource(R.drawable.wire_crosshair);
+                view = map.get(4).findViewById(R.id.element_img);
+                view.setImageResource(R.drawable.wire_left_bottom);
+                view.setRotation(-90);
+                view = map.get(6).findViewById(R.id.element_img);
+                view.setImageResource(R.drawable.wire_left_bottom);
+                view.setRotation(-180);
+                view = map.get(8).findViewById(R.id.element_img);
+                view.setImageResource(R.drawable.and_top_false);
+                view = map.get(9).findViewById(R.id.element_img);
+                view.setImageResource(R.drawable.body_not_in_false_out_true);
+                view = map.get(10).findViewById(R.id.element_img);
+                view.setImageResource(R.drawable.bottom_in_false);
+                view = map.get(13).findViewById(R.id.element_img);
+                view.setImageResource(R.drawable.output);
+                view.setRotation(-180);
+                view.setColorFilter(Color.GREEN);
             }
         });
 
@@ -119,7 +144,7 @@ public class EditorFragment extends Fragment {
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_CANCEL ||
                     event.getAction() == MotionEvent.ACTION_UP){
-                    editMapAdapter.notifyDataSetChanged();
+                    //editMapAdapter.notifyDataSetChanged();
                 }
                 return false;
             }
