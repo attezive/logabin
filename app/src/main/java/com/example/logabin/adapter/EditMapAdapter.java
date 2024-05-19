@@ -3,6 +3,7 @@ package com.example.logabin.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -47,6 +48,7 @@ public class EditMapAdapter extends RecyclerView.Adapter<EditMapAdapter.EditMapV
     @Override
     public void onBindViewHolder(@NonNull EditMapViewHolder holder, int position) {
         holder.bind(list.get(position));
+
     }
 
     public class EditMapViewHolder extends RecyclerView.ViewHolder{
@@ -68,12 +70,12 @@ public class EditMapAdapter extends RecyclerView.Adapter<EditMapAdapter.EditMapV
 
     public void Add(MapElementItem mapElementItem){
         list.add(mapElementItem);
-        notifyDataSetChanged();
+        notifyItemInserted(list.size());
     }
 
     public void Add(MapElementItem mapElementItem, int position){
         list.add(position, mapElementItem);
-        notifyDataSetChanged();
+        notifyItemInserted(position);
     }
 
     public void addNewXLine(int direction){
@@ -93,7 +95,7 @@ public class EditMapAdapter extends RecyclerView.Adapter<EditMapAdapter.EditMapV
     public void addNewYLine(int direction){
         if (direction == 1){
             for (int i = 0; i < xSize; i++){
-                Add(new MapElementItem(0), (i+1)*ySize);
+                Add(new MapElementItem(0), (i+1)*ySize+i);
             }
         } else {
             for (int i = 0; i < xSize; i++){
@@ -112,8 +114,8 @@ public class EditMapAdapter extends RecyclerView.Adapter<EditMapAdapter.EditMapV
         return ySize;
     }
 
-    public void updateIds(){
-        for (int i = 0; i < list.size(); i++){
+    public void updateIds() {
+        for (int i = 0; i < list.size(); i++) {
             list.get(i).setId(i);
         }
     }

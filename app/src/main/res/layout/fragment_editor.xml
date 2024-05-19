@@ -44,7 +44,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/top"/>
+                android:src="@drawable/bottom"/>
             <ImageView
                 android:id="@+id/btn_negative"
                 android:layout_width="60dp"
@@ -52,7 +52,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/bottom"/>
+                android:src="@drawable/top"/>
 
             <ImageView
                 android:id="@+id/btn_start"

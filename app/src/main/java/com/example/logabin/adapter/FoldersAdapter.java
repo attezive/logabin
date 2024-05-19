@@ -59,7 +59,6 @@ public class FoldersAdapter extends RecyclerView.Adapter<FoldersAdapter.FolderVi
 
             folderItemBinding.rvItems.setAdapter(elementsAdapter);
 
-            folderItemBinding.rvItems.setActivated(false);
             folderItemBinding.rvItems.setVisibility(View.GONE);
 
             folderItemBinding.folderTitle.setOnClickListener(new View.OnClickListener() {
