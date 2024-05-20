@@ -56,7 +56,6 @@ public class InteractionController {
     }
 
     private void interact(Element element) {
-        //System.out.println(element.getName() +" : " + element.getId());
         element.interact();
         for (Element nextElement : element.getOutputElements()) {
             interact(nextElement);

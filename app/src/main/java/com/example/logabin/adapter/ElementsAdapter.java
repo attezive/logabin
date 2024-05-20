@@ -8,9 +8,12 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.logabin.MainActivity;
 import com.example.logabin.R;
 import com.example.logabin.databinding.ElementItemBinding;
 import com.example.logabin.databinding.FolderItemBinding;
+import com.example.logabin.db.model.ElementModel;
+import com.example.logabin.fragment.EditorFragment;
 import com.example.logabin.model.ElementItem;
 import com.example.logabin.model.FolderItem;
 
@@ -19,7 +22,7 @@ import java.util.List;
 
 
 public class ElementsAdapter extends RecyclerView.Adapter<ElementsAdapter.ElementViewHolder> {
-    private List<ElementItem> list = new ArrayList<>();
+    private List<ElementModel> list = new ArrayList<>();
 
     @NonNull
     @Override
@@ -46,13 +49,22 @@ public class ElementsAdapter extends RecyclerView.Adapter<ElementsAdapter.Elemen
             elementItemBinding = ElementItemBinding.bind(itemView);
         }
 
-        public void bind(ElementItem elementItem){
-            elementItemBinding.elementName.setText(elementItem.getElementName());
+        public void bind(ElementModel element){
+            elementItemBinding.elementName.setText(element.name);
+            elementItemBinding.elementIcon.setImageResource(element.icon);
+
+            elementItemBinding.elementField.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    EditorFragment.setCurrentElementModel(element);
+                    MainActivity.setPage(1);
+                }
+            });
         }
     }
 
-    public void Add(ElementItem elementItem){
-        list.add(elementItem);
+    public void Add(ElementModel elementModel){
+        list.add(elementModel);
         notifyDataSetChanged();
     }
 }

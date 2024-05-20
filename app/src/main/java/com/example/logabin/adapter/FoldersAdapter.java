@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.logabin.R;
 import com.example.logabin.databinding.FolderItemBinding;
+import com.example.logabin.db.model.ElementModel;
 import com.example.logabin.model.ElementItem;
 import com.example.logabin.model.FolderItem;
 
@@ -53,12 +54,10 @@ public class FoldersAdapter extends RecyclerView.Adapter<FoldersAdapter.FolderVi
                     RecyclerView.VERTICAL, false));
 
             ElementsAdapter elementsAdapter = new ElementsAdapter();
-            elementsAdapter.Add(new ElementItem("Test"));
-            elementsAdapter.Add(new ElementItem("Test"));
-            elementsAdapter.Add(new ElementItem("Test"));
-
+            for (ElementModel element : folderItem.getElements()){
+                elementsAdapter.Add(element);
+            }
             folderItemBinding.rvItems.setAdapter(elementsAdapter);
-
             folderItemBinding.rvItems.setVisibility(View.GONE);
 
             folderItemBinding.folderTitle.setOnClickListener(new View.OnClickListener() {

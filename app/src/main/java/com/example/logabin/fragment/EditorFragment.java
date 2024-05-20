@@ -25,6 +25,7 @@ import com.example.logabin.R;
 import com.example.logabin.adapter.EditMapAdapter;
 import com.example.logabin.adapter.FoldersAdapter;
 import com.example.logabin.adapter.NavigationAdapter;
+import com.example.logabin.db.model.ElementModel;
 import com.example.logabin.model.FolderItem;
 import com.example.logabin.model.MapElementItem;
 
@@ -39,6 +40,7 @@ public class EditorFragment extends Fragment {
     private int currentResize;
     private ImageView btnPositive;
     private ImageView btnNegative;
+    private static ElementModel elementModel;
     RecyclerView editMapRV;
 
     public EditorFragment() {
@@ -46,6 +48,12 @@ public class EditorFragment extends Fragment {
         ySize = 4;
         currentResize = 0;
         currentItem = null;
+        elementModel = null;
+    }
+
+    public static void setCurrentElementModel(ElementModel element){
+        elementModel = element;
+
     }
 
     @Override
@@ -110,7 +118,7 @@ public class EditorFragment extends Fragment {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Log.d("My", elementModel.toString());
             }
         });
 

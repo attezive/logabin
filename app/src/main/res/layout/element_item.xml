@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="20dp">
+    android:layout_height="wrap_content">
 
     <LinearLayout
+        android:id="@+id/element_field"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/element_icon"
+            android:layout_width="100dp"
+            android:layout_height="100dp"/>
         <TextView
             android:id="@+id/element_name"
+            android:layout_marginStart="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="AAAAAAAAAAAAA"/>
+            android:textSize="30sp"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
