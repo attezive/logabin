@@ -14,6 +14,7 @@ import com.example.logabin.R;
 import com.example.logabin.databinding.MapElementItemBinding;
 import com.example.logabin.fragment.EditorFragment;
 import com.example.logabin.model.MapElementItem;
+import com.example.logabin.utils.Coordinate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ import java.util.List;
 
 public class EditMapAdapter extends RecyclerView.Adapter<EditMapAdapter.EditMapViewHolder> {
     private List<MapElementItem> list = new ArrayList<>();
-    private List<LinearLayout> map = new ArrayList<>();
+    private List<ImageView> map = new ArrayList<>();
     private int xSize;
     private int ySize;
     private EditorFragment editorFragment;
@@ -41,7 +42,7 @@ public class EditMapAdapter extends RecyclerView.Adapter<EditMapAdapter.EditMapV
         return new EditMapViewHolder(newView);
     }
 
-    public List<LinearLayout> getMap() {
+    public List<ImageView> getMap() {
         return map;
     }
 
@@ -70,7 +71,8 @@ public class EditMapAdapter extends RecyclerView.Adapter<EditMapAdapter.EditMapV
                     editorFragment.updateElement(mapElementItem);
                 }
             });
-            map.add(position, mapElementItemBinding.mapElement);
+            ImageView view = mapElementItemBinding.mapElement.findViewById(R.id.element_img);
+            map.add(position, view);
         }
     }
 
@@ -123,6 +125,11 @@ public class EditMapAdapter extends RecyclerView.Adapter<EditMapAdapter.EditMapV
     public void updateIds() {
         for (int i = 0; i < list.size(); i++) {
             list.get(i).setId(i);
+            list.get(i).setCoordinate(new Coordinate(i%ySize, i/ySize));
         }
+    }
+
+    public ImageView getElementView(int position){
+        return map.get(position);
     }
 }

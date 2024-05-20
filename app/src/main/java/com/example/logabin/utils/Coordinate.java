@@ -20,6 +20,10 @@ public class Coordinate {
         this.y = y;
     }
 
+    /**
+     * Map x = coordinate y;
+     * Map y = coordinate x
+     **/
     public Coordinate(int x, int y) {
         this.x = x;
         this.y = y;

@@ -3,14 +3,22 @@ package com.example.logabin.model;
 import androidx.annotation.NonNull;
 
 import com.example.logabin.element.Element;
+import com.example.logabin.utils.Coordinate;
 
 public class MapElementItem {
     private int id;
     private Element element;
     private int elementPartNumber;
+    private Coordinate coordinate;
 
     public MapElementItem(int id) {
         this.id = id;
+        this.coordinate = null;
+    }
+
+    public MapElementItem(int id, Coordinate coordinate) {
+        this.id = id;
+        this.coordinate = coordinate;
     }
 
     public int getId() {
@@ -41,5 +49,14 @@ public class MapElementItem {
 
     public void setElementPartNumber(int elementPartNumber) {
         this.elementPartNumber = elementPartNumber;
+    }
+
+
+    public Coordinate getCoordinate() {
+        return coordinate;
+    }
+
+    public void setCoordinate(Coordinate coordinate) {
+        this.coordinate = coordinate;
     }
 }

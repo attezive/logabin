@@ -45,6 +45,15 @@ public class Scheme{
         return null;
     }
 
+    public List<Element> getByName(String name){
+        List<Element> elementList = new ArrayList<>();
+        for (Element element : elements){
+            if (element.getName().equals(name))
+                elementList.add(element);
+        }
+        return elementList;
+    }
+
     public int getIdsCount() {
         return idsCount;
     }

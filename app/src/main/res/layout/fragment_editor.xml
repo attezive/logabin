@@ -26,12 +26,51 @@
                 />
         </LinearLayout>
 
-        <TextView
+        <LinearLayout
             android:id="@+id/info_menu"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textSize="50dp"
-            android:visibility="gone"/>
+            android:orientation="horizontal"
+            android:visibility="gone">
+            <ImageView
+                android:id="@+id/btn_confirm"
+                android:layout_width="60dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/confirm"/>
+            <ImageView
+                android:id="@+id/btn_cancel"
+                android:layout_width="60dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/cancel"/>
+            <TextView
+                android:id="@+id/info_field"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:textSize="13sp"/>
+            <ImageView
+                android:id="@+id/btn_refresh"
+                android:layout_width="60dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/refresh"/>
+            <ImageView
+                android:id="@+id/btn_info"
+                android:layout_width="60dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/info_icon"/>
+        </LinearLayout>
         <LinearLayout
             android:id="@+id/action_menu"
             android:layout_width="match_parent"

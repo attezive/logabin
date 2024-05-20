@@ -8,7 +8,7 @@ public class InputChannel extends Element {
     public InputChannel(int id, String name, int outputCount, Coordinate coordinate) {
         super(id, name, 0, outputCount, coordinate);
         setActive(false);
-        setOutputCoordinate(coordinate);
+        setOutputCoordinate(coordinate.sum(0, 1));
     }
 
     @Override

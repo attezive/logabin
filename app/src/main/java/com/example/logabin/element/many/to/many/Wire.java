@@ -10,10 +10,10 @@ public class Wire extends Element {
     private boolean onceActivated = false;
     private boolean wasChanged = false;
 
-    public Wire(int id, String name, int inputCount, int outputCount, Coordinate coordinate, Coordinate endCoordinate) {
+    public Wire(int id, String name, int inputCount, int outputCount, Coordinate coordinate) {
         super(id, name, inputCount, outputCount, coordinate);
         setInputCoordinate(coordinate);
-        setOutputCoordinate(endCoordinate);
+        setOutputCoordinate(coordinate.sum(0, 1));
     }
 
     @Override
