@@ -177,12 +177,23 @@ public class EditorFragment extends Fragment {
             }
         });
 
+
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                drawableController.updateMap();
-                ConnectionController.instance().updateAll(scheme);
-                InteractionController.instance().updateInteractions(scheme);
+                Thread emulate = new Thread(
+                        new Runnable() {
+                            @Override
+                            public void run() {
+                                ConnectionController.instance().updateAll(scheme);
+                                InteractionController.instance().updateInteractions(scheme);
+                            }
+                        }
+                );
+                emulate.setDaemon(true);
+
+                emulate.start();
+
                 drawableController.updateMap();
             }
         });
@@ -190,6 +201,7 @@ public class EditorFragment extends Fragment {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                drawableController.updateMap();
                 Log.d("My", elementModel.toString());
             }
         });
@@ -199,6 +211,16 @@ public class EditorFragment extends Fragment {
             public void onClick(View v) {
                 currentResize = (currentResize + 1) % 3;
                 updateActionButtons();
+            }
+        });
+
+        infoField.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (currentItem.getElement().getName().equals("InputChannel") && isChangedInfo){
+                    currentItem.getElement().setActive(!currentItem.getElement().isActive());
+                    drawableController.updateMap();
+                }
             }
         });
 
@@ -292,8 +314,12 @@ public class EditorFragment extends Fragment {
 
     private void updateInfo(){
         if (isChangedInfo){
-            infoField.setText("Input count: " + currentItem.getElement().getInputCount() +
-                    ",\nOutput count: " + currentItem.getElement().getOutputCount());
+            if (!currentItem.getElement().getName().equals("InputChannel")){
+                infoField.setText("Input count: " + currentItem.getElement().getInputCount() +
+                        ",\nOutput count: " + currentItem.getElement().getOutputCount());
+            } else {
+                infoField.setText("SWAP");
+            }
         } else {
             infoField.setText("");
         }
