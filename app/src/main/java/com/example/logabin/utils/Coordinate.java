@@ -4,6 +4,8 @@ public class Coordinate {
     private int x;
     private int y;
 
+    private int shift = 0;
+
     public int getX() {
         return x;
     }
@@ -52,5 +54,26 @@ public class Coordinate {
     @Override
     public String toString() {
         return x+":"+y;
+    }
+
+    public void angleRotate(){
+        if (shift == 0){
+            x++;
+            y--;
+        } else if (shift == 1){
+            x--;
+            y--;
+        } else if (shift == 2){
+            x--;
+            y++;
+        } else {
+            x++;
+            y++;
+        }
+        shift = (shift + 1) % 4;
+    }
+
+    public void setShift(int shift) {
+        this.shift = shift;
     }
 }

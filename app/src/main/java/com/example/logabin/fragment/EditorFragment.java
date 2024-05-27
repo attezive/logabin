@@ -32,6 +32,7 @@ import com.example.logabin.utils.Coordinate;
 import com.example.logabin.utils.DrawableController;
 import com.example.logabin.utils.InteractionController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EditorFragment extends Fragment {
@@ -132,6 +133,31 @@ public class EditorFragment extends Fragment {
                 if (!isChangedInfo){
                     ImageView view = editMapAdapter.getElementView(currentItem.getId());
                     view.setRotation(view.getRotation()+90);
+                    for (Coordinate coordinate : currentItem.getElement().getOutputCoordinates())
+                        coordinate.angleRotate();
+                }
+                else {
+                    if (currentItem.getElement().getName().equals("Wire")){
+                        currentItem.setWireType((currentItem.getWireType()+1)%3);
+                        List<Coordinate> coordinates = new ArrayList<>();
+                        if (currentItem.getWireType()==0){
+                            coordinates.add(currentItem.getElement().getOutputCoordinates().get(0));
+                            currentItem.getElement().setOutputCount(1);
+                        } else if (currentItem.getWireType()==1){
+                            coordinates.add(currentItem.getCoordinate().sum(1, 0));
+                            coordinates.add(currentItem.getCoordinate().sum(0, -1));
+                            coordinates.get(0).setShift(1);
+                            coordinates.get(1).setShift(2);
+                            currentItem.getElement().setOutputCount(2);
+                        } else {
+                            coordinates.add(currentItem.getCoordinate().sum(0, 1));
+                            coordinates.add(currentItem.getElement().getOutputCoordinates().get(0));
+                            coordinates.add(currentItem.getCoordinate().sum(-1, 0));
+                            currentItem.getElement().setOutputCount(3);
+                        }
+                        currentItem.getElement().setOutputCoordinates(coordinates);
+                        drawableController.updateMap();
+                    }
                 }
             }
         });
@@ -162,6 +188,7 @@ public class EditorFragment extends Fragment {
                     if (elementModel == null){
                         currentItem.setElement(null);
                         editMapAdapter.getElementView(currentItem.getId()).setImageResource(R.drawable.empty);
+                        editMapAdapter.getElementView(currentItem.getId()).clearColorFilter();
                     } else {
                         elementModel = null;
                     }

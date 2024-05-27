@@ -7,6 +7,7 @@ import com.example.logabin.utils.Coordinate;
 
 public class MapElementItem {
     private int id;
+    private int wireType = 0;
     private Element element;
     private int elementPartNumber;
     private Coordinate coordinate;
@@ -58,5 +59,14 @@ public class MapElementItem {
 
     public void setCoordinate(Coordinate coordinate) {
         this.coordinate = coordinate;
+    }
+
+
+    public int getWireType() {
+        return wireType;
+    }
+
+    public void setWireType(int wireType) {
+        this.wireType = wireType;
     }
 }

@@ -32,7 +32,13 @@ public class DrawableController {
             case "Wire":
                 if (view.getTag() == null){
                     view.setTag(R.drawable.empty);
+                }
+                if (item.getWireType() == 0){
                     view.setImageResource(R.drawable.wire_line_horizontal);
+                } else if (item.getWireType() == 1){
+                    view.setImageResource(R.drawable.wire_left_bottom);
+                } else {
+                    view.setImageResource(R.drawable.wire_crosshair);
                 }
                 view.setColorFilter(item.getElement().isActive() ? Color.GREEN : Color.RED);
                 return;

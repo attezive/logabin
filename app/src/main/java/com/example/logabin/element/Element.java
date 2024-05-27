@@ -133,4 +133,8 @@ public abstract class Element {
         if (!outputCoordinates.contains(coordinate))
             this.outputCoordinates.add(coordinate);
     }
+
+    public void setOutputCoordinates(List<Coordinate> coordinates){
+        this.outputCoordinates = coordinates;
+    }
 }
