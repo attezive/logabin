@@ -132,4 +132,8 @@ public class EditMapAdapter extends RecyclerView.Adapter<EditMapAdapter.EditMapV
     public ImageView getElementView(int position){
         return map.get(position);
     }
+
+    public List<MapElementItem> getList() {
+        return list;
+    }
 }
