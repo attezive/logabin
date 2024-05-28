@@ -138,17 +138,19 @@ public class EditorFragment extends Fragment {
                 }
                 else {
                     if (currentItem.getElement().getName().equals("Wire")){
-                        currentItem.setWireType((currentItem.getWireType()+1)%3);
+                        currentItem.setWireType((currentItem.getWireType()+1)%4);
                         List<Coordinate> coordinates = new ArrayList<>();
                         if (currentItem.getWireType()==0){
-                            coordinates.add(currentItem.getElement().getOutputCoordinates().get(0));
+                            coordinates.add(currentItem.getCoordinate().sum(0, 1));
                             currentItem.getElement().setOutputCount(1);
                         } else if (currentItem.getWireType()==1){
                             coordinates.add(currentItem.getCoordinate().sum(1, 0));
-                            coordinates.add(currentItem.getCoordinate().sum(0, -1));
                             coordinates.get(0).setShift(1);
-                            coordinates.get(1).setShift(2);
-                            currentItem.getElement().setOutputCount(2);
+                            currentItem.getElement().setOutputCount(1);
+                        } else if (currentItem.getWireType()==2){
+                            coordinates.add(currentItem.getCoordinate().sum(1, 0));
+                            coordinates.get(0).setShift(1);
+                            currentItem.getElement().setOutputCount(1);
                         } else {
                             coordinates.add(currentItem.getCoordinate().sum(0, 1));
                             coordinates.add(currentItem.getElement().getOutputCoordinates().get(0));

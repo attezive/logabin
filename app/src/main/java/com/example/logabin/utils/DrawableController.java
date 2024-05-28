@@ -35,8 +35,13 @@ public class DrawableController {
                 }
                 if (item.getWireType() == 0){
                     view.setImageResource(R.drawable.wire_line_horizontal);
+                    view.setScaleX(1);
                 } else if (item.getWireType() == 1){
                     view.setImageResource(R.drawable.wire_left_bottom);
+                    view.setScaleX(1);
+                } else if (item.getWireType() == 2){
+                    view.setImageResource(R.drawable.wire_left_bottom);
+                    view.setScaleX(-1);
                 } else {
                     view.setImageResource(R.drawable.wire_crosshair);
                 }
