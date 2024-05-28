@@ -6,14 +6,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.logabin.R;
 import com.example.logabin.adapter.FoldersAdapter;
-import com.example.logabin.db.LocalDatabase;
 import com.example.logabin.db.model.ElementModel;
 import com.example.logabin.model.FolderItem;
 

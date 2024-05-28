@@ -126,7 +126,7 @@
             android:layout_height="match_parent"
             android:gravity="bottom"
             android:textAlignment="textEnd"
-            android:text="Version 0.0.0.1"
+            android:text="Version 1.0.0"
             />
 
 
