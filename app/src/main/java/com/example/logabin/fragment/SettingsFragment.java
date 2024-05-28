@@ -54,13 +54,6 @@ public class SettingsFragment extends Fragment {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        TabLayout tl = getActivity().findViewById(R.id.navigation);
-        tl.selectTab(null);
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
         TabLayout tl = getActivity().findViewById(R.id.navigation);
