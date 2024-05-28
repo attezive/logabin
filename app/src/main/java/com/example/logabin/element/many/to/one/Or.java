@@ -7,7 +7,7 @@ public class Or extends Element {
 
     public Or(int id, String name, int inputCount, Coordinate coordinate) {
         super(id, name, inputCount, 1, coordinate);
-        setOutputCoordinate(coordinate.sum(inputCount/2, 2));
+        setOutputCoordinate(coordinate.sum(inputCount/2, 1));
         int shift = inputCount % 2 == 0 ? 1 : 0;
         for (int i = 0; i < inputCount; i++){
             if (i < inputCount/2){

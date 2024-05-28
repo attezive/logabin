@@ -24,6 +24,9 @@ import com.example.logabin.element.InputChannel;
 import com.example.logabin.element.OutputChannel;
 import com.example.logabin.element.many.to.many.Wire;
 import com.example.logabin.element.many.to.one.And;
+import com.example.logabin.element.many.to.one.NotAnd;
+import com.example.logabin.element.many.to.one.NotOr;
+import com.example.logabin.element.many.to.one.Or;
 import com.example.logabin.element.one.to.one.Not;
 import com.example.logabin.model.MapElementItem;
 import com.example.logabin.scheme.Scheme;
@@ -377,6 +380,35 @@ public class EditorFragment extends Fragment {
                 scheme.add(currentItem.getElement());
                 editMapAdapter.getElementView(currentItem.getId()).setImageResource(R.drawable.output);
                 return;
+            case "And":
+                currentItem.setElement(new And(currentItem.getId(), elementModel.name, 2, currentItem.getCoordinate()));
+                scheme.add(currentItem.getElement());
+                editMapAdapter.getElementView(currentItem.getId()).setImageResource(R.drawable.and_top_false);
+                editMapAdapter.getElementView(currentItem.getId()+1).setImageResource(R.drawable.body_out_false);
+                editMapAdapter.getElementView(currentItem.getId()+2).setImageResource(R.drawable.bottom_in_false);
+                return;
+            case "Or":
+                currentItem.setElement(new Or(currentItem.getId(), elementModel.name, 2, currentItem.getCoordinate()));
+                scheme.add(currentItem.getElement());
+                editMapAdapter.getElementView(currentItem.getId()).setImageResource(R.drawable.or_top_false);
+                editMapAdapter.getElementView(currentItem.getId()+1).setImageResource(R.drawable.body_out_false);
+                editMapAdapter.getElementView(currentItem.getId()+2).setImageResource(R.drawable.bottom_in_false);
+                return;
+            case "NotAnd":
+                currentItem.setElement(new NotAnd(currentItem.getId(), elementModel.name, 2, currentItem.getCoordinate()));
+                scheme.add(currentItem.getElement());
+                editMapAdapter.getElementView(currentItem.getId()).setImageResource(R.drawable.and_top_false);
+                editMapAdapter.getElementView(currentItem.getId()+1).setImageResource(R.drawable.body_not_out_false);
+                editMapAdapter.getElementView(currentItem.getId()+2).setImageResource(R.drawable.bottom_in_false);
+                return;
+            case "NotOr":
+                currentItem.setElement(new NotOr(currentItem.getId(), elementModel.name, 2, currentItem.getCoordinate()));
+                scheme.add(currentItem.getElement());
+                editMapAdapter.getElementView(currentItem.getId()).setImageResource(R.drawable.or_top_false);
+                editMapAdapter.getElementView(currentItem.getId()+1).setImageResource(R.drawable.body_not_out_false);
+                editMapAdapter.getElementView(currentItem.getId()+2).setImageResource(R.drawable.bottom_in_false);
+                return;
+
         }
     }
 }

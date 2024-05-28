@@ -63,6 +63,59 @@ public class DrawableController {
                 return;
             case "Not":
                 view.setImageResource(item.getElement().isActive() ? R.drawable.not_false : R.drawable.not_true);
+                return;
+            case "And":
+                if (!item.getElement().getInputElements().isEmpty() && item.getElement().getInputElements().get(0).isActive()){
+                    view.setImageResource(R.drawable.and_top_true);
+                } else {
+                    view.setImageResource(R.drawable.and_top_false);
+                }
+                if (item.getElement().getInputElements().size() == 2 && item.getElement().getInputElements().get(1).isActive()){
+                    map.getElementView(item.getId()+2).setImageResource(R.drawable.bottom_in_true);
+                } else {
+                    map.getElementView(item.getId()+2).setImageResource(R.drawable.bottom_in_false);
+                }
+                map.getElementView(item.getId()+1).setImageResource(item.getElement().isActive() ? R.drawable.body_out_true : R.drawable.body_out_false);
+                return;
+            case "Or":
+                if (!item.getElement().getInputElements().isEmpty() && item.getElement().getInputElements().get(0).isActive()){
+                    view.setImageResource(R.drawable.or_top_true);
+                } else {
+                    view.setImageResource(R.drawable.or_top_false);
+                }
+                if (item.getElement().getInputElements().size() == 2 && item.getElement().getInputElements().get(1).isActive()){
+                    map.getElementView(item.getId()+2).setImageResource(R.drawable.bottom_in_true);
+                } else {
+                    map.getElementView(item.getId()+2).setImageResource(R.drawable.bottom_in_false);
+                }
+                map.getElementView(item.getId()+1).setImageResource(item.getElement().isActive() ? R.drawable.body_out_true : R.drawable.body_out_false);
+                return;
+            case "NotAnd":
+                if (!item.getElement().getInputElements().isEmpty() && item.getElement().getInputElements().get(0).isActive()){
+                    view.setImageResource(R.drawable.and_top_true);
+                } else {
+                    view.setImageResource(R.drawable.and_top_false);
+                }
+                if (item.getElement().getInputElements().size() == 2 && item.getElement().getInputElements().get(1).isActive()){
+                    map.getElementView(item.getId()+2).setImageResource(R.drawable.bottom_in_true);
+                } else {
+                    map.getElementView(item.getId()+2).setImageResource(R.drawable.bottom_in_false);
+                }
+                map.getElementView(item.getId()+1).setImageResource(item.getElement().isActive() ? R.drawable.body_not_out_false : R.drawable.body_not_out_true);
+                return;
+            case "NotOr":
+                if (!item.getElement().getInputElements().isEmpty() && item.getElement().getInputElements().get(0).isActive()){
+                    view.setImageResource(R.drawable.or_top_true);
+                } else {
+                    view.setImageResource(R.drawable.or_top_false);
+                }
+                if (item.getElement().getInputElements().size() == 2 && item.getElement().getInputElements().get(1).isActive()){
+                    map.getElementView(item.getId()+2).setImageResource(R.drawable.bottom_in_true);
+                } else {
+                    map.getElementView(item.getId()+2).setImageResource(R.drawable.bottom_in_false);
+                }
+                map.getElementView(item.getId()+1).setImageResource(item.getElement().isActive() ? R.drawable.body_not_out_false : R.drawable.body_not_out_true);
+                return;
         }
     }
 }
