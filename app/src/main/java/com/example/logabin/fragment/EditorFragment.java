@@ -1,5 +1,6 @@
 package com.example.logabin.fragment;
 
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -58,6 +59,7 @@ public class EditorFragment extends Fragment {
     private RecyclerView editMapRV;
     private Scheme scheme;
     private DrawableController drawableController;
+    private static boolean isAutoInteract;
 
     public EditorFragment() {
         xSize = 5;
@@ -67,6 +69,10 @@ public class EditorFragment extends Fragment {
         elementModel = null;
         isChangedInfo = false;
         scheme = new Scheme();
+    }
+
+    public static void setAutoInteract(boolean state){
+        isAutoInteract = state;
     }
 
     public static void setCurrentElementModel(ElementModel element){
@@ -219,6 +225,7 @@ public class EditorFragment extends Fragment {
                             public void run() {
                                 ConnectionController.instance().updateAll(scheme);
                                 InteractionController.instance().updateInteractions(scheme);
+                                drawableController.updateMap();
                             }
                         }
                 );
@@ -251,6 +258,21 @@ public class EditorFragment extends Fragment {
             public void onClick(View v) {
                 if (currentItem.getElement().getName().equals("InputChannel") && isChangedInfo){
                     currentItem.getElement().setActive(!currentItem.getElement().isActive());
+                    if (isAutoInteract){
+                        Thread emulate = new Thread(
+                                new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        ConnectionController.instance().updateAll(scheme);
+                                        InteractionController.instance().updateInteractions(scheme);
+                                        drawableController.updateMap();
+                                    }
+                                }
+                        );
+                        emulate.setDaemon(true);
+
+                        emulate.start();
+                    }
                     drawableController.updateMap();
                 }
             }

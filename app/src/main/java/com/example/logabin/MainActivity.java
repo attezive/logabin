@@ -1,6 +1,8 @@
 package com.example.logabin;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         if (localDatabase.elementDao().getAllElementModels().isEmpty())
             initialDbLoad();
 
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        EditorFragment.setAutoInteract(preferences.getBoolean("AutoInteract", false));
 
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
@@ -50,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new MenuFragment(localDatabase.elementDao().getAllElementModels()));
         adapter.addFragment(new EditorFragment());
         adapter.addFragment(new HomeFragment());
-        adapter.addFragment(new SettingsFragment());
+        adapter.addFragment(new SettingsFragment(preferences));
         adapter.addFragment(new SchemesFragment());
         adapter.addFragment(new EducationFragment());
 
